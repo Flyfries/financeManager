@@ -133,7 +133,7 @@ ol{
   width:300px;
 }
 #holder{
-  z-index: -1;
+  /*z-index: -1;*/
   margin:-350px 0 0 -350px;width:700px;height:700px;position:absolute;right:0%;top:50%; overflow: hidden;}
 
 
@@ -206,8 +206,8 @@ var financeManager = {
   connect:{}
 }
 
-var category = ["食堂","外面吃饭","水果和零食","生活用品","晓清非要花的","学习","通讯和交通"] ;
-var categoryEle = ["canteen","eatingOut","fruit","living","dear","learning","connect"];
+var category = ["食堂","外面吃饭","水果和零食","生活用品","晓清非要花的","学习","娱乐","通讯和交通"] ;
+var categoryEle = ["canteen","eatingOut","fruit","living","dear","learning","fun","connect"];
 
   
  
@@ -306,12 +306,14 @@ function update(){
     if (j== currentTabNum){
       tab.addClass("currentTab");
     }
+    moneyCount[categoryEle[j]] = 0;
     if(window.localStorage[categoryEle[j]] ){
      listShow[categoryEle[j]] =  JSON.parse( window.localStorage[categoryEle[j]] );
       
   }
   else{
     listShow[categoryEle[j]] = [];
+    
   }
  
   
@@ -321,10 +323,7 @@ function update(){
     
   for (var i = 0; i < Object.keys(listShow[categoryEle[j]]).length ; i++) {
       newRow = $("<tr><td>￥"+listShow[categoryEle[j]][i][0]+"</td><td>"+listShow[categoryEle[j]][i][1]+"</td><td>"+listShow[categoryEle[j]][i][2]+"</td></tr>");  
-    if (!moneyCount[categoryEle[j]]) {
-          moneyCount[categoryEle[j]] = 0;
-        }
-        moneyCount[categoryEle[j]] += +listShow[categoryEle[j]][i][0];
+      moneyCount[categoryEle[j]] += +listShow[categoryEle[j]][i][0];
     newTable.append(newRow);
   }
 
